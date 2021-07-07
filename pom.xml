@@ -6,7 +6,7 @@
 
     <groupId>cn.eastnight</groupId>
     <artifactId>eastnight</artifactId>
-    <version>${eastnight.version}</version>
+    <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -22,9 +22,41 @@
     <properties>
         <java.version>1.8</java.version>
         <eastnight.version>1.0-SNAPSHOT</eastnight.version>
+        <druid.version>1.2.6</druid.version>
+        <mybatis-spring-boot.version>2.1.4</mybatis-spring-boot.version>
     </properties>
     <dependencyManagement>
         <dependencies>
         </dependencies>
     </dependencyManagement>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.mybatis.generator</groupId>
+                <artifactId>mybatis-generator-maven-plugin</artifactId>
+                <version>1.3.6</version>
+                <configuration>
+                    <!--配置文件的位置-->
+                    <configurationFile>eastnight-service/src/main/resources/generatorConfig.xml</configurationFile>
+                    <verbose>true</verbose>
+                    <overwrite>true</overwrite>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>Generate MyBatis Artifacts</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.mybatis.generator</groupId>
+                        <artifactId>mybatis-generator-core</artifactId>
+                        <version>1.3.6</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
 </project>

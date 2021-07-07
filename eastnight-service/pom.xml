@@ -6,11 +6,12 @@
         <groupId>cn.eastnight</groupId>
         <artifactId>eastnight</artifactId>
         <version>1.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <groupId>com.eastnight</groupId>
     <artifactId>eastnight-service</artifactId>
-    <version>${eastnight.version}</version>
+    <version>0.0.1-SNAPSHOT</version>
 
     <name>eastnight-service</name>
     <description>eastnight服务提供</description>
@@ -20,17 +21,26 @@
         <dependency>
             <groupId>cn.eastnight</groupId>
             <artifactId>eastnight-api</artifactId>
-            <version>${eastnight.version}</version>
+            <version>0.0.1-SNAPSHOT</version>
+
         </dependency>
         <!-- 引入slf4j 门面-->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
         </dependency>
+        <!-- 阿里数据库连接池 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>${druid.version}</version>
+        </dependency>
+
         <!-- mybatis -->
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>${mybatis-spring-boot.version}</version>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>
@@ -50,6 +60,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+
         </plugins>
     </build>
 
