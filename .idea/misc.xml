@@ -11,6 +11,7 @@
         <option value="$PROJECT_DIR$/eastnight-api/pom.xml" />
         <option value="$PROJECT_DIR$/eastnight-service/pom.xml" />
         <option value="$PROJECT_DIR$/eastnight-web/pom.xml" />
+        <option value="$PROJECT_DIR$/eastnight-config/pom.xml" />
       </list>
     </option>
   </component>
