@@ -8,10 +8,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="eastnight-api" />
-        <module name="eastnight-config" />
         <module name="eastnight-service" />
         <module name="eastnight-web" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="eastnight-config" target="1.7" />
+    </bytecodeTargetLevel>
   </component>
 </project>
