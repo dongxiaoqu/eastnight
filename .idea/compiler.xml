@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="eastnight-api" />
+        <module name="eastnight-config" />
         <module name="eastnight-service" />
         <module name="eastnight-web" />
       </profile>

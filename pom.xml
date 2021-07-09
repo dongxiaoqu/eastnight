@@ -18,6 +18,7 @@
         <module>eastnight-api</module>
         <module>eastnight-service</module>
         <module>eastnight-web</module>
+        <module>eastnight-config</module>
     </modules>
     <properties>
         <java.version>1.8</java.version>
@@ -37,7 +38,7 @@
                 <version>1.3.6</version>
                 <configuration>
                     <!--配置文件的位置-->
-                    <configurationFile>eastnight-service/src/main/resources/generatorConfig.xml</configurationFile>
+                    <configurationFile>src/main/resources/generatorConfig.xml</configurationFile>
                     <verbose>true</verbose>
                     <overwrite>true</overwrite>
                 </configuration>
