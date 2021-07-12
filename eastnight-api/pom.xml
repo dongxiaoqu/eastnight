@@ -19,6 +19,12 @@
 
     </properties>
     <dependencies>
+        <!--wnadk -->
+        <dependency>
+            <artifactId>wnadk</artifactId>
+            <groupId>cn.wnsoft.wnadk</groupId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>

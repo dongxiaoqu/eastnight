@@ -1,7 +1,9 @@
 package cn.eastnight.common.security;
 
+import cn.eastnight.common.util.WnPasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -10,6 +12,7 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
  * <p>标题：Security 配置类</p>
@@ -34,8 +37,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/login")
-                .loginProcessingUrl("/dologin")
+                .loginPage("/login_page")
+                .loginProcessingUrl("/login/form")
+                .usernameParameter("username")
+                .passwordParameter("password")
                 .failureForwardUrl("/error")
                 .successForwardUrl("/index")
                 .permitAll()
@@ -57,8 +62,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userService);
+        auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
+        // 使用自定义登录身份认证组件
     }
 
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new WnPasswordEncoder();
+    }
 
 }

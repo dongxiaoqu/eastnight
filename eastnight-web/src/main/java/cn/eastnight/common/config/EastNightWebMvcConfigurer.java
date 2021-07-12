@@ -19,7 +19,7 @@ public class EastNightWebMvcConfigurer implements WebMvcConfigurer {
      */
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/login").setViewName("login");
+        registry.addViewController("/login_page").setViewName("login");
         registry.addViewController("/console").setViewName("console");
         registry.addViewController("/index").setViewName("index");
     }

@@ -11,6 +11,8 @@
         <module name="eastnight-config" />
         <module name="eastnight-service" />
         <module name="eastnight-web" />
+        <module name="wnadk-base" />
+        <module name="wnadk-utils" />
       </profile>
     </annotationProcessing>
   </component>
