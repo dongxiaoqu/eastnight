@@ -13,8 +13,5 @@
         <module name="eastnight-web" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="eastnight-config" target="1.7" />
-    </bytecodeTargetLevel>
   </component>
 </project>

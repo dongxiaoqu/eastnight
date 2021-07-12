@@ -7,17 +7,18 @@ import java.util.List;
 
 @Repository
 public interface UserDao {
-    int deleteByPrimaryKey(String userId);
 
-    int insert(UserEntry record);
-
-    int insertSelective(UserEntry record);
-
-    UserEntry selectByPrimaryKey(String userId);
-
-    int updateByPrimaryKeySelective(UserEntry record);
-
-    int updateByPrimaryKey(UserEntry record);
-
+    /**
+     * 获取所有用户
+     * @return
+     */
     List<UserEntry> getAllUser();
+
+    /**
+     * 通过用户名获取用户实体
+     *
+     * @param username
+     * @return
+     */
+    UserEntry getUserByUsername(String username);
 }

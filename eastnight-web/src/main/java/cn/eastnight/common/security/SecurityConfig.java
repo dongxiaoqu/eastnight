@@ -1,12 +1,15 @@
 package cn.eastnight.common.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 /**
  * <p>标题：Security 配置类</p>
@@ -19,28 +22,43 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    @Qualifier("EastNight-UserService")
+    private UserDetailsService userService;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/", "/index","/getAllUser").permitAll()
+                .antMatchers("/*", "/index", "/sendMessage", "/getAllUser").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
+                .loginProcessingUrl("/dologin")
+                .failureForwardUrl("/error")
+                .successForwardUrl("/index")
                 .permitAll()
                 .and()
                 .logout()
                 .permitAll();
+        //开启跨域访问
+        http.cors().disable();
+        //开启模拟请求，比如API POST测试工具的测试，不开启时，API POST为报403错误
+        http.csrf().disable();
     }
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().mvcMatchers("/css/**","/data/**","/images/**","/js/**","/lib/**","/template/**");
+        web.ignoring().antMatchers(HttpMethod.OPTIONS, "/**");
+        //静态资源忽略
+        web.ignoring().mvcMatchers("/css/**", "/data/**", "/images/**", "/js/**", "/lib/**", "/template/**");
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.getDefaultUserDetailsService();
+        auth.userDetailsService(userService);
     }
+
+
 }

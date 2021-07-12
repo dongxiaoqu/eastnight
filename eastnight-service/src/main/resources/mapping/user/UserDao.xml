@@ -23,16 +23,16 @@
     user_id, username, password, nickname, mobile, email, gender, age, status, user_type, 
     del_flag, remark, creator, create_time, modifier, modify_time
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from sys_user
-    where user_id = #{userId,jdbcType=VARCHAR}
-  </select>
   <select id="getAllUser" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from sys_user
+  </select>
+  <select id="getUserByUsername" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sys_user
+    where username=#{username,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from sys_user
