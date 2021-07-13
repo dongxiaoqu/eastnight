@@ -18,11 +18,16 @@
     <packaging>jar</packaging>
 
     <dependencies>
+        <!--wnadk -->
+        <dependency>
+            <groupId>cn.wnsoft.wnadk</groupId>
+            <artifactId>wnadk-base</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
         <dependency>
             <groupId>cn.eastnight</groupId>
             <artifactId>eastnight-api</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-
         </dependency>
         <!-- 引入slf4j 门面-->
         <dependency>
@@ -51,7 +56,11 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
+        <!-- spring security-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

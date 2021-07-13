@@ -1,8 +1,11 @@
 package cn.eastnight.module.user.service.impl;
 
+import cn.eastnight.module.user.constant.UserStatus;
 import cn.eastnight.module.user.entry.UserEntry;
 import cn.eastnight.module.user.mapper.UserDao;
 import cn.eastnight.module.user.service.UserService;
+import cn.wnsoft.wnadk.base.exception.BaseException;
+import cn.wnsoft.wnadk.base.util.StrUtils;
 import com.alibaba.druid.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,24 +26,27 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserEntry user= userDao.getUserByUsername(username);
-        if (StrUtils.isNull(user))
+        if (StrUtils.isNull(user.toString()))
         {
             logger.info("登录用户：{} 不存在.", username);
             throw new UsernameNotFoundException("登录用户：" + username + " 不存在");
         }
         else if (UserStatus.DELETED.getCode().equals(user.getDelFlag()))
         {
-            log.info("登录用户：{} 已被删除.", username);
+            logger.info("登录用户：{} 已被删除.", username);
             throw new BaseException("对不起，您的账号：" + username + " 已被删除");
         }
         else if (UserStatus.DISABLE.getCode().equals(user.getStatus()))
         {
-            log.info("登录用户：{} 已被停用.", username);
+            logger.info("登录用户：{} 已被停用.", username);
             throw new BaseException("对不起，您的账号：" + username + " 已停用");
         }
-        return null;
+        return createLoginUser(user);
     }
-
+    private UserDetails createLoginUser(UserEntry user)
+    {
+        return new LoginUser(user, permissionService.getMenuPermission(user));
+    }
     @Override
     public List<UserEntry> getAllUsers() {
         return userDao.getAllUser();
