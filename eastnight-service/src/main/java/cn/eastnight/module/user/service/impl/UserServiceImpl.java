@@ -1,6 +1,7 @@
 package cn.eastnight.module.user.service.impl;
 
 import cn.eastnight.module.user.constant.UserStatus;
+import cn.eastnight.module.user.entry.LoginUserInfo;
 import cn.eastnight.module.user.entry.UserEntry;
 import cn.eastnight.module.user.mapper.UserDao;
 import cn.eastnight.module.user.service.UserService;
@@ -45,7 +46,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     }
     private UserDetails createLoginUser(UserEntry user)
     {
-        return new LoginUser(user, permissionService.getMenuPermission(user));
+        return new LoginUserInfo(user, permissionService.getMenuPermission(user));
     }
     @Override
     public List<UserEntry> getAllUsers() {
